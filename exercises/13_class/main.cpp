@@ -15,12 +15,24 @@ class Fibonacci {
 public:
     // TODO: 实现构造器
     // Fibonacci()
+    Fibonacci() : cached(2) {
+        cache[0] = 0;// 斐波那契数列的第 0 项
+        cache[1] = 1;// 斐波那契数列的第 1 项
+    }
 
     // TODO: 实现正确的缓存优化斐波那契计算
     size_t get(int i) {
-        for (; false; ++cached) {
-            cache[cached] = cache[cached - 1] + cache[cached - 2];
+        // for (; false; ++cached) {
+        //     cache[cached] = cache[cached - 1] + cache[cached - 2];
+        // }
+        if (i < cached) {
+            return cache[i];
         }
+        for (int idx = cached; idx <= i; ++idx) {
+            cache[idx] = cache[idx - 1] + cache[idx - 2];
+        }
+
+        cached = i + 1;
         return cache[i];
     }
 };
